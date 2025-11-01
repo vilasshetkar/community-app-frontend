@@ -62,7 +62,7 @@ jobs:
 
             docker run -d --restart unless-stopped \
               --name $REPO_NAME \
-              -p 4000:4000 \
+              -p 4000:80 \
               $IMAGE
 
             docker image prune -af

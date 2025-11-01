@@ -1,14 +1,12 @@
-# Stage 1: Build the Angular SSR app
+# Stage 1: Build the Angular app
 FROM node:18 AS build
 WORKDIR /app
 COPY . .
-RUN npm install --force
-RUN npm run build:ssr
+RUN npm install && npm run build -- --output-path=dist
 
-# Stage 2: Run the SSR Node.js server
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=build /app/dist /app/dist
-COPY --from=build /app/node_modules /app/node_modules
-EXPOSE 4000
-CMD ["node", "dist/server/main.js"]
+# Stage 2: Serve with Nginx
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY ./public/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
