@@ -2,7 +2,7 @@
 FROM node:18 AS build
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install --force
 RUN npm run build:ssr
 
 # Stage 2: Run the SSR Node.js server
