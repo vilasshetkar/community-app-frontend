@@ -1,0 +1,86 @@
+<h2 class="mb-3 text-center">Register</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row mb-3">
+        <div class="col">
+            <label for="firstName" class="form-label">First Name</label>
+            <input id="firstName" type="text" class="form-control" formControlName="firstName" placeholder="First Name" required>
+            <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.errors" class="text-danger small">
+                <div *ngIf="form.get('firstName')?.errors?.['required']">First name is required</div>
+            </div>
+        </div>
+        <div class="col">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input id="lastName" type="text" class="form-control" formControlName="lastName" placeholder="Last Name" required>
+            <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.errors" class="text-danger small">
+                <div *ngIf="form.get('lastName')?.errors?.['required']">Last name is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input id="email" type="email" class="form-control" formControlName="email" placeholder="Email" required>
+        <div *ngIf="form.get('email')?.touched && form.get('email')?.errors" class="text-danger small">
+            <div *ngIf="form.get('email')?.errors?.['required']">Email is required</div>
+            <div *ngIf="form.get('email')?.errors?.['email']">Invalid email address</div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile</label>
+        <ngx-intl-tel-input class="d-block w-100" [cssClass]="'form-control d-block w-100'"
+            [preferredCountries]="[CountryISO.UnitedStates,
+            CountryISO.UnitedKingdom]"
+            [enableAutoCountrySelect]="false"
+            [enablePlaceholder]="true"
+            [searchCountryFlag]="true"
+            [searchCountryField]="[SearchCountryField.Iso2,
+            SearchCountryField.Name]" [selectFirstCountry]="false"
+            [selectedCountryISO]="CountryISO.UnitedStates"
+            [maxLength]="15"
+            [phoneValidation]="true"
+            [inputId]="'my-input-id'"
+            [numberFormat]="PhoneNumberFormat.International"
+            formControlName="mobile" name="mobile" id="mobile"></ngx-intl-tel-input>
+        <div *ngIf="form.get('mobile')?.touched && form.get('mobile')?.invalid" class="text-danger small">
+            Mobile is required and must be valid.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input id="password" type="password" class="form-control" formControlName="password" placeholder="Password"
+            required>
+        <div *ngIf="form.get('password')?.touched && form.get('password')?.errors" class="text-danger small">
+            <div *ngIf="form.get('password')?.errors?.['required']">Password is required</div>
+            <div *ngIf="form.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col">
+            <label for="password" class="form-label">Password</label>
+            <input id="password" type="password" class="form-control" formControlName="password" placeholder="Password" required>
+            <div *ngIf="form.get('password')?.touched && form.get('password')?.errors" class="text-danger small">
+                <div *ngIf="form.get('password')?.errors?.['required']">Password is required</div>
+                <div *ngIf="form.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
+            </div>
+        </div>
+        <div class="col">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input id="confirmPassword" type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" required>
+            <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.errors" class="text-danger small">
+                <div *ngIf="form.get('confirmPassword')?.errors?.['required']">Confirm password is required</div>
+            </div>
+            <div *ngIf="form.errors?.['passwordsMismatch'] && form.get('confirmPassword')?.touched" class="text-danger small">
+                Passwords do not match
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid || loading">Register</button>
+    <div *ngIf="errorMsg" class="alert alert-danger mt-3 text-center">{{ errorMsg }}</div>
+</form>
+<div class="d-flex justify-content-center my-3 border-top pt-3">
+    <a (click)="startGoogleOAuth()" class="btn btn-outline-warning w-100">
+        <i class="bi bi-google"></i> Register with Google
+    </a>
+</div>
+<div class="text-center mt-2">
+    <a routerLink="/auth/login">Already have an account? Login</a>
+</div>

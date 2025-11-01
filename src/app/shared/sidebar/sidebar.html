@@ -1,0 +1,35 @@
+<div class="sidebar-sticky pt-3">
+    <div class="mb-4">
+        <h5>Welcome</h5>
+        <button *ngIf="selectedGroup?.status === 'Approved'" class="btn btn-outline-success btn-sm mt-2 ms-4" (click)="onCreatePost(selectedGroup)">Create Post</button>
+    </div>
+    <div class="mb-4">
+        <h6>My Groups</h6>
+        <ul class="list-group mb-2">
+            <li class="list-group-item d-flex flex-column align-items-start" *ngFor="let group of myGroups" style="cursor:pointer;">
+                <div class="d-flex align-items-center w-100">
+                    <a [routerLink]="['./category', group.group.id]" (click)="onGroupClick(group)"
+                        class="d-flex align-items-center text-decoration-none w-100">
+                        <img [src]="group.group.image || 'https://via.placeholder.com/32'" alt="{{ group.group.name }}"
+                            class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                        <span>{{ group.group.name }}</span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h6>Explore Groups</h6>
+        <ul class="list-group mb-2">
+            <li class="list-group-item d-flex align-items-center" *ngFor="let group of exploreGroups.slice(0, 5)"
+                style="cursor:pointer;">
+                <a [routerLink]="['./category', group.id]" (click)="onGroupClick(group)"
+                    class="d-flex align-items-center text-decoration-none w-100">
+                    <img [src]="group.image || 'https://via.placeholder.com/32'" alt="{{ group.name }}"
+                        class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                    <span>{{ group.name }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

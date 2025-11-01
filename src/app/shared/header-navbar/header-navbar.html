@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">Argo Atlantic</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <ng-container *ngIf="(userIdentity.isLoggedIn | async) as loggedIn">
+                    <li class="nav-item" *ngIf="loggedIn && !isDashboardRoute">
+                        <a class="nav-link" routerLink="/dashboard">Dashboard</a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="userIdentity.isLoggedIn | async; else loginLinks">
+                    <li class="nav-item" ngbDropdown>
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" ngbDropdownToggle id="profileDropdown" role="button">
+                            <span class="me-2"><i class="bi bi-person-circle"></i></span>
+                            <span>{{ userIdentity.userDetails?.name || 'Profile' }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" routerLink="/dashboard/profile">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;" >Logout</a></li>
+                        </ul>
+                    </li>
+                </ng-container>
+                <ng-template #loginLinks>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/auth/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/auth/register">Signup</a>
+                    </li>
+                </ng-template>
+            </ul>
+        </div>
+    </div>
+</nav>

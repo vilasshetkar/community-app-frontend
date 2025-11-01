@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Atlas by Argo Atlantic | AI-Powered Immigration Pathways</title>
+  <meta name="title" content="Atlas by Argo Atlantic | AI-Powered Immigration Pathways">
+  <meta name="description"
+    content="Discover UK Innovator Founder Visa, UK High Potential Individual Visa, and UK Global Talent Visa with AI-powered guidance. Join Atlas community to connect, share, and scale your journey.">
+  <meta name="keywords"
+    content="UK Innovator Founder Visa, UK Global Talent Visa, UK High Potential Individual Visa, AI Immigration Pathways, Immigration Community, Argo Atlantic">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Argo Atlantic">
+
+  <!-- Favicon & Logo -->
+  <link rel="icon" href="https://atlasbyargoatlantic.com/Argo-Atlantic-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="https://atlasbyargoatlantic.com/Argo-Atlantic-logo.png">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://atlasbyargoatlantic.com/">
+  <meta property="og:title" content="Atlas by Argo Atlantic | AI-Powered Immigration Pathways">
+  <meta property="og:description"
+    content="Explore UK Innovator Founder, High Potential Individual, and Global Talent Visas with AI-powered recommendations. Join the Atlas community for trusted support.">
+  <meta property="og:image" content="https://atlasbyargoatlantic.com/Argo-Atlantic-logo.png">
+  <meta property="og:site_name" content="Atlas by Argo Atlantic">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://atlasbyargoatlantic.com/">
+  <meta name="twitter:title" content="Atlas by Argo Atlantic | AI-Powered Immigration Pathways">
+  <meta name="twitter:description"
+    content="AI-powered immigration path discovery with Atlas. Connect, exchange insights, and unlock opportunities.">
+  <meta name="twitter:image" content="https://atlasbyargoatlantic.com/Argo-Atlantic-logo.png">
+
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+  <style>
+    body {
+      background: linear-gradient(to right, #1a1a1a, #2c2c2c);
+      color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hover-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .loading img {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+      }
+    }
+
+    /* Make WOW elements hidden until WOW applies the animate__animated class.
+       This prevents elements from being visible/animated prematurely. */
+    .wow {
+      visibility: hidden;
+    }
+
+    .wow.animate__animated {
+      visibility: visible;
+    }
+
+    /* Hero background + parallax */
+    .hero-parallax {
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero-parallax .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none
+    }
+
+    .hero-parallax .hero-bg img {
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      transform: translateY(0);
+      transition: transform 0.12s linear;
+      will-change: transform;
+      filter: brightness(.6) saturate(.95)
+    }
+
+    .hero-parallax .hero-inner {
+      position: relative;
+      z-index: 10;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem 1rem
+    }
+
+    @media (min-width:768px) {
+      .hero-parallax .hero-inner {
+        min-height: 72vh;
+        padding: 3rem 2rem
+      }
+    }
+
+    @media (min-width:1024px) {
+      .hero-parallax .hero-inner {
+        min-height: 85vh;
+        padding: 4rem 3rem
+      }
+    }
+
+    @media (max-width:768px) {
+      /* .hero-parallax .hero-bg{display:none} */
+    }
+
+    /* Respect user motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-parallax .hero-bg img {
+        transition: none !important;
+        transform: none !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div id="loader" class="loading">
+    <img src="Argo-Atlantic-logo.png" alt="Atlas Logo" class="w-32 h-32" />
+  </div>
+
+  <!-- Main Content -->
+  <div id="content" class="hidden">
+    <!-- Header -->
+    <header
+      class="flex items-center justify-between bg-black bg-opacity-40 sticky top-0 backdrop-blur-lg z-50 px-4 sm:px-6 lg:px-10 py-4">
+      <div class="flex items-center space-x-3">
+        <img src="Argo-Atlantic-logo.png" alt="Atlas Logo" class="w-16 h-16" />
+        <h1 class="text-2xl leading-none font-bold">Atlas <br><span class="text-gray-400 text-sm">by Argo
+            Atlantic</span></h1>
+      </div>
+      <a href="https://argo.pensil.in/"
+        class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white transition hidden sm:inline-block">Join
+        Community</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-parallax text-center py-12 sm:py-16 lg:py-20 relative px-4 sm:px-6 lg:px-10">
+      <!-- background image (parallax) -->
+      <div class="hero-bg" aria-hidden="true">
+        <img id="heroBgImg" loading="lazy" src="argo-atlantic-hero.jpg"
+          alt="World map with digital connections, symbolizing global community and AI-powered pathways" />
+      </div>
+
+      <div class="hero-inner">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 wow animate__fadeInUp">ATLAS
+          <br><span class="text-gray-400 text-sm">by Argo Atlantic</span>
+        </h2>
+        <p class="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto wow animate__fadeInUp"
+          data-wow-delay="0.2s">The AI-powered passport to the world — smart immigration
+          pathways, trusted experts, and a thriving global community.</p>
+        <div class="mt-6 sm:mt-8 flex justify-center gap-4 wow animate__fadeInUp" data-wow-delay="0.4s">
+          <a href="https://argo.pensil.in/"
+            class="block sm:inline-block w-full sm:w-auto text-center px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg text-white">Get
+            Started</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features -->
+    <section class="px-4 sm:px-6 lg:px-10 py-12 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-6 wow animate__fadeInUp">Features Coming Soon 🚀</h2>
+      <p class="text-gray-400 mb-10 max-w-2xl mx-auto wow animate__fadeInUp" data-wow-delay="0.2s">We’re building
+        powerful tools to make your immigration journey seamless. Stay tuned for these upcoming features that will
+        transform your experience.</p>
+
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl bg-gray-900 hover-card flex flex-col h-full text-left wow animate__fadeInUp"
+          data-wow-offset="200" data-wow-delay="0.3s">
+          <img src="DISCOVER.jpeg" alt="Discover Feature" class="rounded-lg mb-4 h-40 w-full object-cover" />
+          <h3 class="text-xl font-bold mb-2">DISCOVER</h3>
+          <p class="text-gray-400 mb-2">The world’s most trusted and transparent immigration community.</p>
+          <span class="text-sm text-purple-400 font-semibold">Coming Soon</span>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-900 hover-card flex flex-col h-full text-left wow animate__fadeInUp"
+          data-wow-offset="200" data-wow-delay="0.5s">
+          <img src="MATCH.jpeg" alt="Match Feature" class="rounded-lg mb-4 h-40 w-full object-cover" />
+          <h3 class="text-xl font-bold mb-2">MATCH</h3>
+          <p class="text-gray-400 mb-2">Instantly book with vetted and AI-ranked immigration experts.</p>
+          <span class="text-sm text-purple-400 font-semibold">Coming Soon</span>
+        </div>
+        <div class="p-6 rounded-2xl bg-gray-900 hover-card flex flex-col h-full text-left wow animate__fadeInUp"
+          data-wow-offset="200" data-wow-delay="0.7s">
+          <img src="MONITOR.jpeg" alt="Monitor Feature" class="rounded-lg mb-4 h-40 w-full object-cover" />
+          <h3 class="text-xl font-bold mb-2">MONITOR</h3>
+          <p class="text-gray-400 mb-2">Track your journey from visa application to citizenship with real-time alerts
+            for every update.</p>
+          <span class="text-sm text-purple-400 font-semibold">Coming Soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- UK Visa Highlight -->
+    <section class="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 lg:py-16 bg-black bg-opacity-60">
+      <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+        <!-- Image -->
+        <div class="rounded-xl overflow-hidden shadow-lg bg-gray-800 wow animate__fadeInLeft">
+          <img loading="lazy" src="ui-founder-visa-argo-atlantic.jpg" alt="UK Innovator Founder"
+            class="w-full h-56 sm:h-72 md:h-80 lg:h-96 object-cover" />
+        </div>
+
+        <!-- Content -->
+        <div class="wow animate__fadeInRight" data-wow-delay="0.3s">
+          <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3">Featured Pathways</h3>
+          <p class="text-lg text-gray-300 mb-4">UK Innovator Founder Visa, UK High Potential Individual Visa, and UK Global
+            Talent Visa</p>
+          <ul class="text-gray-300 mt-2 space-y-3 mb-6 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="text-2xl">🤝</span>
+              <span>
+                <strong class="text-white">Find trusted service providers</strong><br />
+                <span class="text-gray-400">to help you on your journey.</span>
+              </span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-2xl">🌐</span>
+              <span>
+                <strong class="text-white">Connect with the Atlas community</strong><br />
+                <span class="text-gray-400">Exchange trustworthy insights & crowdsource reliable knowledge in a secure
+                  space.</span>
+              </span>
+            </li>
+          </ul>
+          <a href="https://argo.pensil.in/"
+            class="inline-flex items-center gap-3 px-4 py-2 sm:px-5 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-semibold shadow-lg text-white">
+            Join Our Community
+            <span class="text-sm text-white/90"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="text-center px-4 py-12 sm:py-16 bg-gradient-to-r from-purple-600 to-pink-600 wow animate__zoomIn">
+
+      <h2 class="text-2xl italic font-bold text-gray-200 mb-6 sm:mb-8">Trust moves faster.</h2>
+      <a href="https://argo.pensil.in/"
+        class="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-black text-white rounded-lg font-bold hover:opacity-90">Join
+        Our Community</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-gray-500 text-sm wow animate__fadeInUp">
+      © 2025 Argo Atlantic • All Rights Reserved
+    </footer>
+  </div>
+
+  <script>
+    // Loader + show content + initialize WOW AFTER content is visible
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        // reveal content
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("content").classList.remove("hidden");
+
+        // Initialize WOW.js after content is visible and layout has settled.
+        // Configure animateClass for Animate.css v4 (animate__ prefix) and set offset.
+        if (typeof WOW !== 'undefined') {
+          setTimeout(() => {
+            new WOW({
+              boxClass: 'wow',
+              animateClass: 'animate__animated',
+              offset: 50, // px before element is considered visible
+              mobile: true,
+              live: true
+            }).init();
+
+            // Force a reflow/resize so WOW computes positions correctly
+            window.dispatchEvent(new Event('resize'));
+          }, 120); // small delay to allow content to layout
+        }
+      }, 900);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<div class="container py-4">
+  <div class="mb-4">
+    <h2 class="fw-light">How to get started?</h2>
+    <p class="text-muted">Select group to join and explore topics!</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let cat of categories">
+      <div class="card h-100 shadow-sm">
+        <div class="ratio ratio-4x3">
+          <img *ngIf="cat.image" [src]="cat.image" alt="{{cat.name}}" class="card-img-top" style="object-fit:cover;">
+          <div *ngIf="!cat.image" class="bg-light d-flex align-items-center justify-content-center w-100 h-100 text-secondary">
+            <i class="bi bi-image fs-1"></i>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ cat.name }}</h5>
+          <p class="card-text text-muted">{{ cat.description || 'No description available.' }}</p>
+        </div>
+        <div class="card-footer bg-transparent border-0">
+          <a class="btn btn-outline-primary btn-sm" [routerLink]="['/dashboard/category', cat.id]">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="categories.length === 0" class="text-center text-muted py-5">
+      No categories found.
+    </div>
+  </div>
+</div>

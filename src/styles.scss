@@ -1,0 +1,23 @@
+// Brand color variables
+$primary:   #b86f50;  // Brand copper tone
+$secondary: #4b3f3b;  // Deep brown accent
+$success:   #28a745;
+$danger:    #dc3545;
+$warning:   #ffc107;
+$info:      #17a2b8;
+
+$body-bg:   #ffffff;
+$body-color:#212121;  // Dark readable text
+$border-color: #d1c7c3;  // Soft warm border
+
+$link-color:       $primary;
+$link-hover-color: darken($primary, 10%);
+
+$pagination-active-bg: $primary;
+$pagination-hover-bg:  $primary;
+
+// Import Bootstrap SCSS after variable overrides
+@import 'bootstrap/scss/bootstrap';
+@import 'intl-tel-input/build/css/intlTelInput.css';
+
+/* You can add global styles to this file, and also import other style files */

@@ -1,0 +1,61 @@
+<div *ngIf="formControl.value" class="card rounded-5 mb-4 bg-primary bg-opacity-10">
+  <div class="card-body position-relative d-flex flex-column align-items-center">
+    <p class="card-text text-center fw-bold mb-0">{{ to.label }} <span *ngIf="to.required && !to['hideRequiredMarker']" aria-hidden="true">*</span></p>
+    <div class="btn-group" role="group" aria-label="File Button Toolbar">
+      <button type="button" class="btn btn-link" (click)="removeImage()"><i class="bi bi-trash"></i> </button>
+      <a class="btn btn-link" [href]="formControl.value" [download]="to.label"> <i class="bi bi-download"></i> </a>
+    </div>
+    <div class="ratio ratio-4x3">
+      <ng-container *ngIf="formControl.value?.length; else singleFile">
+        <div class="row justify-content-center">
+          <ng-container *ngFor="let file of formControl.value; let i = index">
+            <div class="col-4 d-flex justify-content-center mb-2" *ngIf="i % 3 === 0">
+              <ng-container *ngFor="let innerFile of formControl.value.slice(i, i + 3)">
+                <ng-container *ngIf="isImage(innerFile); else videoOrFile">
+                  <img [src]="innerFile" class="object-fit-contain mx-1" style="max-width: 100px; max-height: 75px;" />
+                </ng-container>
+                <ng-template #videoOrFile>
+                  <ng-container *ngIf="isVideo(innerFile); else fileIcon">
+                    <video [src]="innerFile" controls class="object-fit-contain mx-1" style="max-width: 100px; max-height: 75px;"></video>
+                  </ng-container>
+                  <ng-template #fileIcon>
+                    <img src="/assets/pdf-file.png" class="object-fit-contain mx-1" style="max-width: 100px; max-height: 75px;" />
+                  </ng-template>
+                </ng-template>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #singleFile>
+        <ng-container *ngIf="isImage(formControl.value); else singleVideoOrFile">
+          <img [src]="formControl.value" class="object-fit-contain mx-auto d-block" style="max-width: 100%; max-height: 200px;" />
+        </ng-container>
+        <ng-template #singleVideoOrFile>
+          <ng-container *ngIf="isVideo(formControl.value); else singleFileIcon">
+            <video [src]="formControl.value" controls class="object-fit-contain mx-auto d-block" style="max-width: 100%; max-height: 200px;"></video>
+          </ng-container>
+          <ng-template #singleFileIcon>
+            <img src="/assets/pdf-file.png" class="object-fit-contain mx-auto d-block" style="max-width: 100px; max-height: 75px;" />
+          </ng-template>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<!-- NEW CARD IF DATA NOT PRESENT -->
+<div class="card position-relative rounded-5 bg-primary bg-opacity-10" (click)="fileInputRef.nativeElement.click()" *ngIf="!formControl.value">
+  <div class="card-body d-flex flex-column align-items-center">
+    <p class="card-text text-center fw-bold">{{ to.label }} <span *ngIf="to.required && !to['hideRequiredMarker']" aria-hidden="true">*</span></p>
+    <img src="assets/upload.svg" alt="upload-file" class="my-auto" width="25rem" />
+    <span class="mt-1">Drag and Drop</span>
+    <span class="mt-1 btn-link">Browse</span>
+  </div>
+</div>
+
+<input type="file" class="form-control" [formlyAttributes]="field" [class.is-invalid]="showError" #fileInput (change)="fileInput.files && uploadMedia(fileInput.files, to['urlType'])" [multiple]="to['multiple']" [hidden]="true" [attr.accept]="to.type && mimeTypes[to.type]?.type?.join(',')" />
+
+<div class="progress" *ngIf="progress">
+  <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{ 'width.%': progress }" [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
