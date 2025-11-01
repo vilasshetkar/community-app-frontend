@@ -75,10 +75,36 @@
 							<span>{{ dislikeCount }}</span>
 						</button>
 					</div>
+					<!-- Comments/Reviews Section -->
+					<div class="mt-4">
+						<h5 class="mb-3">Comments & Reviews</h5>
+						<form class="mb-3 d-flex gap-2" (ngSubmit)="submitComment()">
+							<input type="text" class="form-control" placeholder="Add a comment..."
+								[(ngModel)]="newComment" name="comment" [disabled]="isSubmittingComment">
+							<button type="submit" class="btn btn-primary"
+								[disabled]="isSubmittingComment || !newComment.trim()">
+								<span *ngIf="!isSubmittingComment">Post</span>
+								<span *ngIf="isSubmittingComment"><span
+										class="spinner-border spinner-border-sm"></span></span>
+							</button>
+						</form>
+						<div *ngIf="commentsLoading" class="text-muted">Loading comments...</div>
+						<div *ngIf="!commentsLoading && comments.length === 0" class="text-muted">No comments yet.</div>
+						<ul class="list-unstyled">
+							<li *ngFor="let comment of comments" class="mb-3 d-flex align-items-start">
+								<img [src]="comment.author?.profilePicture || 'https://ui-avatars.com/api/?name=' + (comment.author?.firstName || '') + '+' + (comment.author?.lastName || '')"
+									class="rounded-circle me-2" width="40" height="40" alt="Profile">
+								<div>
+									<div class="fw-bold">{{ comment.author?.firstName }} {{ comment.author?.lastName }}
+									</div>
+									<div class="small text-muted">{{ comment.created_at | date:'short' }}</div>
+									<div>{{ comment.message }}</div>
+								</div>
+							</li>
+						</ul>
+					</div>
 					<!-- Social Share (if component available) -->
 					<!-- <fa-social-share ...> </fa-social-share> -->
-					<!-- Reviews (if component available) -->
-					<!-- <fa-review ...> </fa-review> -->
 				</footer>
 			</article>
 		</div>

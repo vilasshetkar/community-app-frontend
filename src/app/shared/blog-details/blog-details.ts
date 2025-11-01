@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiHelperService } from '../api-helper.service';
 import { CommonModule, DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @Component({
   selector: 'app-blog-details',
-  imports: [CommonModule, DatePipe, CarouselModule],
+  imports: [CommonModule, DatePipe, CarouselModule, FormsModule],
   templateUrl: './blog-details.html',
   styleUrl: './blog-details.scss',
 })
@@ -14,6 +15,11 @@ export class BlogDetails implements OnInit {
   public likeDislike: boolean | null = null;
   public likeCount: number = 0;
   public dislikeCount: number = 0;
+
+  public comments: any[] = [];
+  public newComment: string = '';
+  public isSubmittingComment = false;
+  public commentsLoading = false;
 
   onLikeDislike(like: boolean) {
     let referenceId = this.pageData?.id || this.blogId;
@@ -101,6 +107,7 @@ export class BlogDetails implements OnInit {
           this.likeDislike = res?.userLikeDislike ?? null;
           this.likeCount = res?.likes_count ?? 0;
           this.dislikeCount = res?.dislikes_count ?? 0;
+          this.fetchComments();
         },
         error: () => {
           // Fallback default data
@@ -121,9 +128,47 @@ export class BlogDetails implements OnInit {
           this.likeDislike = null;
           this.likeCount = 100;
           this.dislikeCount = 50;
+          this.comments = [];
         }
       });
     }
+  }
+
+  fetchComments() {
+    if (!this.pageData?.id && !this.blogId) return;
+    this.commentsLoading = true;
+    const postId = this.pageData?.id || this.blogId;
+    this.api.get(`/posts/comments/?post=${postId}`).subscribe({
+      next: (res: any) => {
+        // If API returns an array or {results: []}
+        this.comments = Array.isArray(res) ? res : (res.results || []);
+        this.commentsLoading = false;
+      },
+      error: () => {
+        this.comments = [];
+        this.commentsLoading = false;
+      }
+    });
+  }
+
+  submitComment() {
+    if (!this.newComment.trim() || this.isSubmittingComment) return;
+    this.isSubmittingComment = true;
+    const postId = this.pageData?.id || this.blogId;
+    this.api.post('/posts/comments/', {
+      post: postId,
+      message: this.newComment.trim()
+    }).subscribe({
+      next: (res: any) => {
+        this.newComment = '';
+        this.isSubmittingComment = false;
+        this.fetchComments();
+      },
+      error: () => {
+        this.isSubmittingComment = false;
+        // Optionally show error toast
+      }
+    });
   }
 
   calculateReadingTime(text: string): number {

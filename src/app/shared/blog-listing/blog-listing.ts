@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router, Params, RouterModule } from '@angular/router';
 import { ApiHelperService } from '../api-helper.service';
+import { combineLatest } from 'rxjs';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 @Component({
   selector: 'app-blog-listing',
   standalone: true,
-  imports: [CommonModule, NgbPaginationModule, RouterModule],
+  imports: [CommonModule, NgbPaginationModule, RouterModule, CarouselModule],
   templateUrl: './blog-listing.html'
 })
 export class BlogListing implements OnInit {
@@ -27,15 +29,8 @@ export class BlogListing implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    combineLatest([this.route.paramMap, this.route.queryParamMap]).subscribe(([params, qp]) => {
       this.categoryId = params.get('categoryId') || '';
-      this.page = +(this.route.snapshot.queryParamMap.get('page') || 1);
-      this.pageSize = +(this.route.snapshot.queryParamMap.get('page_size') || 30);
-      this.search = this.route.snapshot.queryParamMap.get('search') || '';
-      this.status = (this.route.snapshot.queryParamMap.get('status') as 'Active' | 'Inactive') || 'Active';
-      this.fetchBlogs();
-    });
-    this.route.queryParamMap.subscribe(qp => {
       this.page = +(qp.get('page') || 1);
       this.pageSize = +(qp.get('page_size') || 30);
       this.search = qp.get('search') || '';
@@ -46,11 +41,14 @@ export class BlogListing implements OnInit {
 
   fetchBlogs() {
     const params: any = {
-      category: this.categoryId,
       page: this.page,
       page_size: this.pageSize,
       status: this.status
     };
+    // Only send category if not 'general' and not empty
+    if (this.categoryId && this.categoryId !== 'general') {
+      params.category = this.categoryId;
+    }
     if (this.search) params.search = this.search;
     this.api.get<any>('/posts/posts/', { params }).subscribe({
       next: (data: any) => {

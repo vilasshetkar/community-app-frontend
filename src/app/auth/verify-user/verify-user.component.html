@@ -1,1 +1,19 @@
-<p>Verify User works!</p>
+<h1 [ngClass]="config.verifyUserHeadingClass" [innerHtml]="data.verifyUserHeading"></h1>
+<h2 *ngIf="data.verifyUserSubHeading" [ngClass]="config.verifyUserSubHeadingClass" [innerHtml]="data.verifyUserSubHeading"></h2>
+<p [ngClass]="config.verifyUserDescriptionClass" [innerHtml]="data.verifyUserDescription"></p>
+<div [ngClass]="config.verifyUserPreloaderClass" *ngIf="loading">
+	<div [ngClass]="config.verifyUserSpinnerClass" role="status">
+		<span class="visually-hidden">Loading...</span>
+	</div>
+</div>
+
+<ng-container *ngIf="!loading && !success">
+	<h2 [ngClass]="config.verifyUserErrorHeadingClass" [innerHtml]="errMessage"></h2>
+	<button [ngClass]="config.verifyUserErrorBtnClass" routerLink="/auth/forgot-password">{{data.verifyUserErrorBtnText}}</button>
+	<button [ngClass]="config.verifyUserErrorLoginBtnClass" routerLink="/auth/login">{{data.verifyUserErrorLoginBtnText}}</button>
+</ng-container>
+
+<ng-container *ngIf="!loading && success">
+	<h2 [ngClass]="config.verifyUserSuccessHeadingClass" [innerHtml]="data.verifyUserSuccessHeading"></h2>
+	<button [ngClass]="config.verifyUserSuccessBtnClass" routerLink="/auth/login">{{data.verifyUserSuccessBtnText}}</button>
+</ng-container>

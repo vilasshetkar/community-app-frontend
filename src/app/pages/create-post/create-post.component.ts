@@ -34,6 +34,8 @@ export class CreatePostComponent {
         statusbar: false
     };
 
+    categoryId: string | null = null;
+
     constructor(
         private fb: FormBuilder,
         private router: Router,
@@ -44,8 +46,16 @@ export class CreatePostComponent {
         this.form = this.fb.group({
             title: ['', Validators.required],
             description: ['', Validators.required],
+            categories: [[]],
             images: [[]],
             videos: [[]]
+        });
+        // Set categoryId from route params if present
+        this.route.paramMap.subscribe(params => {
+            this.categoryId = params.get('categoryId');
+            if (this.categoryId && this.categoryId !== 'general') {
+                this.form.patchValue({ categories: [this.categoryId] });
+            }
         });
     }
 
@@ -131,7 +141,13 @@ export class CreatePostComponent {
     }
 
     onSubmit() {
-        console.log(this.form);
+        // Ensure categoryId is set in categories before submit
+        if (this.categoryId && this.categoryId !== 'general') {
+            const cats = this.form.value.categories || [];
+            if (!cats.includes(this.categoryId)) {
+                this.form.patchValue({ categories: [this.categoryId] });
+            }
+        }
         if (this.form.valid) {
             this.api.post('/posts/posts/', this.form.value).subscribe({
                 next: (res) => {

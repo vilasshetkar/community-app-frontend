@@ -7,8 +7,8 @@
     <div class="col-md-4" *ngFor="let cat of categories">
       <div class="card h-100 shadow-sm">
         <div class="ratio ratio-4x3">
-          <img *ngIf="cat.image" [src]="cat.image" alt="{{cat.name}}" class="card-img-top" style="object-fit:cover;">
-          <div *ngIf="!cat.image" class="bg-light d-flex align-items-center justify-content-center w-100 h-100 text-secondary">
+          <img *ngIf="cat.images.length > 0" [src]="cat.images[0]" alt="{{cat.name}}" class="card-img-top" style="object-fit:cover;">
+          <div *ngIf="cat.images.length === 0" class="bg-light d-flex align-items-center justify-content-center w-100 h-100 text-secondary">
             <i class="bi bi-image fs-1"></i>
           </div>
         </div>

@@ -1,6 +1,18 @@
 <div class="sidebar-sticky pt-3">
     <div class="mb-4">
         <h5>Welcome</h5>
+        <ul class="list-group mt-2">
+            <li class="list-group-item">
+                <a routerLink="/dashboard" class="d-block py-1 text-decoration-none">
+                    <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a routerLink="/dashboard/category/general" class="d-block py-1 text-decoration-none">
+                    <i class="bi bi-chat-dots me-1"></i> Discussions
+                </a>
+            </li>
+        </ul>
     </div>
     <div class="mb-4">
         <h6>My Groups</h6>
@@ -9,8 +21,8 @@
                 <div class="d-flex align-items-center w-100">
                     <a [routerLink]="['./category', group.group.id]" (click)="onGroupClick(group)"
                         class="d-flex align-items-center text-decoration-none w-100">
-                        <ng-container *ngIf="group.group.image; else noGroupImg">
-                            <img [src]="group.group.image" alt="{{ group.group.name }}"
+                        <ng-container *ngIf="group.group?.images && group.group?.images.length > 0; else noGroupImg">
+                            <img [src]="group.group?.images[0]" [alt]="group.group?.name"
                                 class="rounded me-2" width="32" height="32" style="object-fit:cover;">
                         </ng-container>
                         <ng-template #noGroupImg>
@@ -31,8 +43,8 @@
                 style="cursor:pointer;">
                 <a [routerLink]="['./category', group.id]" (click)="onGroupClick(group)"
                     class="d-flex align-items-center text-decoration-none w-100">
-                    <ng-container *ngIf="group.image; else noExploreImg">
-                        <img [src]="group.image" alt="{{ group.name }}"
+                    <ng-container *ngIf="group.images && group.images.length > 0; else noExploreImg">
+                        <img [src]="group.images[0]" alt="{{ group.name }}"
                             class="rounded me-2" width="32" height="32" style="object-fit:cover;">
                     </ng-container>
                     <ng-template #noExploreImg>

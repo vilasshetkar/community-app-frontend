@@ -12,6 +12,14 @@ import { DashboardMain } from './pages/dashboard-main/dashboard-main';
 import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
+    {
+        path: 'reset-password/:token',
+        loadComponent: () => import('./auth/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+    },
+    {
+        path: 'verify-user/:uid/:token',
+        loadComponent: () => import('./auth/verify-user/verify-user.component').then(m => m.VerifyUserComponent)
+    },
     { path: '', component: Home },
     { path: 'edit-profile', component: EditProfileComponent },
     {
