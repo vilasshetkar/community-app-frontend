@@ -1,6 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" routerLink="/">Argo Atlantic</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+            <img src="Argo-Atlantic-logo.png" alt="Atlas Logo" height="50" class="me-2" />
+            <span class="d-flex flex-column lh-1">
+                <span style="font-size:1.25rem; font-weight:700; line-height:1.2;">Atlas</span>
+                <span style="font-size:0.85rem; color:#ced4da; line-height:1;">by Argo Atlantic</span>
+            </span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,7 +25,7 @@
                             <span>{{ userIdentity.userDetails?.name || 'Profile' }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" ngbDropdownMenu aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" routerLink="/dashboard/profile">Profile</a></li>
+                            <li><a class="dropdown-item" routerLink="/edit-profile">Edit Profile</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

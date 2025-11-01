@@ -1,13 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Animate.css for animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- WOW.js for scroll animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
   <meta charset="utf-8">
   <title>ArgoAtlantic</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="./Argo-Atlantic-logo.png">
 </head>
 <body>
+    <script>
+      // Initialize WOW.js after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() {
+        if (typeof WOW !== 'undefined') {
+          new WOW({
+            boxClass: 'wow',
+            animateClass: 'animate__animated',
+            offset: 50,
+            mobile: true,
+            live: true
+          }).init();
+        }
+      });
+    </script>
   <app-root></app-root>
 </body>
 </html>

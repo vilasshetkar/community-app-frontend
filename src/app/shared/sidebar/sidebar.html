@@ -1,7 +1,6 @@
 <div class="sidebar-sticky pt-3">
     <div class="mb-4">
         <h5>Welcome</h5>
-        <button *ngIf="selectedGroup?.status === 'Approved'" class="btn btn-outline-success btn-sm mt-2 ms-4" (click)="onCreatePost(selectedGroup)">Create Post</button>
     </div>
     <div class="mb-4">
         <h6>My Groups</h6>
@@ -10,8 +9,15 @@
                 <div class="d-flex align-items-center w-100">
                     <a [routerLink]="['./category', group.group.id]" (click)="onGroupClick(group)"
                         class="d-flex align-items-center text-decoration-none w-100">
-                        <img [src]="group.group.image || 'https://via.placeholder.com/32'" alt="{{ group.group.name }}"
-                            class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                        <ng-container *ngIf="group.group.image; else noGroupImg">
+                            <img [src]="group.group.image" alt="{{ group.group.name }}"
+                                class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                        </ng-container>
+                        <ng-template #noGroupImg>
+                            <div class="bg-light d-flex align-items-center justify-content-center rounded me-2" style="width:32px; height:32px;">
+                                <i class="bi bi-image fs-5 text-secondary"></i>
+                            </div>
+                        </ng-template>
                         <span>{{ group.group.name }}</span>
                     </a>
                 </div>
@@ -25,8 +31,15 @@
                 style="cursor:pointer;">
                 <a [routerLink]="['./category', group.id]" (click)="onGroupClick(group)"
                     class="d-flex align-items-center text-decoration-none w-100">
-                    <img [src]="group.image || 'https://via.placeholder.com/32'" alt="{{ group.name }}"
-                        class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                    <ng-container *ngIf="group.image; else noExploreImg">
+                        <img [src]="group.image" alt="{{ group.name }}"
+                            class="rounded me-2" width="32" height="32" style="object-fit:cover;">
+                    </ng-container>
+                    <ng-template #noExploreImg>
+                        <div class="bg-light d-flex align-items-center justify-content-center rounded me-2" style="width:32px; height:32px;">
+                            <i class="bi bi-image fs-5 text-secondary"></i>
+                        </div>
+                    </ng-template>
                     <span>{{ group.name }}</span>
                 </a>
             </li>

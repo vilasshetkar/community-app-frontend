@@ -55,9 +55,10 @@ export class ApiHelperService {
   }
 
   private handleError(error: any) {
+    console.log(error.error.error);
     let message = 'An unknown error occurred.';
-    if (error?.error?.message) {
-      message = error.error.message;
+    if (error?.error?.error?.message) {
+      message = error.error.error.message;
     } else if (error?.status) {
       message = `Error ${error.status}: ${error.statusText}`;
     }

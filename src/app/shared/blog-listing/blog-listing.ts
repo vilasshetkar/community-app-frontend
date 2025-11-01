@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router, Params, RouterModule } from '@angular/router';
 import { ApiHelperService } from '../api-helper.service';
-import { BlogCardComponent } from './blog-card';
 
 @Component({
   selector: 'app-blog-listing',
   standalone: true,
-  imports: [CommonModule, BlogCardComponent, NgbPaginationModule, RouterModule],
+  imports: [CommonModule, NgbPaginationModule, RouterModule],
   templateUrl: './blog-listing.html'
 })
 export class BlogListing implements OnInit {
@@ -73,5 +72,3 @@ export class BlogListing implements OnInit {
     });
   }
 }
-
-export { BlogCardComponent };

@@ -1,0 +1,56 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+          <div class="mb-3">
+            <img [src]="user?.profilePicture || 'https://ui-avatars.com/api/?name=' + (user?.firstName || '') + '+' + (user?.lastName || '')" class="rounded-circle border" style="width: 100px; height: 100px; object-fit: cover;">
+          </div>
+          <form [formGroup]="profileForm">
+            <div class="row g-3">
+              <div class="col-6">
+                <label class="form-label">First Name</label>
+                <input class="form-control" formControlName="firstName" [disabled]="true">
+              </div>
+              <div class="col-6">
+                <label class="form-label">Last Name</label>
+                <input class="form-control" formControlName="lastName" [disabled]="true">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Email</label>
+                <input class="form-control" formControlName="email" [disabled]="true">
+              </div>
+              <div class="col-12">
+                <label class="form-label">Phone</label>
+                <input class="form-control" formControlName="phone" [disabled]="true">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="mb-3">Change Password</h5>
+          <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" *ngIf="!passwordChanged()">
+            <div class="mb-3">
+              <label class="form-label">Current Password</label>
+              <input type="password" class="form-control" formControlName="oldPassword">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input type="password" class="form-control" formControlName="newPassword">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" formControlName="confirmPassword">
+            </div>
+            <button type="submit" class="btn btn-primary w-100" [disabled]="passwordForm.invalid">Change Password</button>
+          </form>
+          <div *ngIf="passwordChanged()" class="alert alert-success text-center">
+            Password changed successfully!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

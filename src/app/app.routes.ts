@@ -6,11 +6,14 @@ import { BlogListing } from './shared/blog-listing/blog-listing';
 import { CreatePostComponent } from './pages/create-post/create-post.component';
 import { AuthGuard } from './auth/auth.guard';
 import { authRoutes } from './auth/auth-routing.module';
+
 import { PendingForApprovalComponent } from './pages/pending-for-approval/pending-for-approval.component';
 import { DashboardMain } from './pages/dashboard-main/dashboard-main';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 export const routes: Routes = [
     { path: '', component: Home },
+    { path: 'edit-profile', component: EditProfileComponent },
     {
         path: 'auth',
         loadChildren: () => import('./auth/auth-routing.module').then(m => m.authRoutes)

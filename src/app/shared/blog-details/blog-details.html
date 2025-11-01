@@ -1,7 +1,86 @@
-<div class="card">
-	<div class="card-body">
-		<h4 class="card-title">Blog Title</h4>
-		<p class="card-text">Blog details and content will be shown here based on the selected blog.</p>
-		<!-- Add more blog details, author, date, etc. -->
+<div class="container my-3">
+	<div class="row justify-content-center">
+		<div class="col-lg-10 col-xl-8">
+			<article class="bg-white rounded shadow p-4">
+				<!-- Blog Images / Carousel (ngx-bootstrap) -->
+				<ng-container *ngIf="config.showArticleImage">
+					<carousel *ngIf="pageData?.images?.length > 1" class="mb-4 rounded shadow" [itemsPerSlide]="1"
+						[singleSlideOffset]="false" [noWrap]="false">
+						<ng-container *ngFor="let img of pageData.images">
+							<slide>
+								<img [src]="img" [alt]="pageData.heading || pageData.name"
+									class="d-block w-100 img-fluid rounded" />
+							</slide>
+						</ng-container>
+					</carousel>
+					<div *ngIf="(!pageData?.images || pageData?.images?.length <= 1) && pageData?.image"
+						class="mb-4 text-center">
+						<img [src]="pageData.image" [alt]="pageData.heading || pageData.name" class="img-fluid rounded"
+							[ngClass]="config.articleImageClass" />
+					</div>
+				</ng-container>
+
+				<!-- Blog Header -->
+				<header class="mb-3 border-bottom pb-3">
+					<h1 class="fw-bold mb-2" *ngIf="pageData?.heading || pageData?.name">{{ pageData?.heading ||
+						pageData?.name }}</h1>
+					<h2 class="h5 text-secondary mb-2" *ngIf="pageData?.subHeading">{{ pageData.subHeading }}</h2>
+					<div class="text-muted small d-flex flex-wrap align-items-center gap-3">
+						<span *ngIf="pageData?.publishStartDate">
+							<i class="bi bi-calendar me-1"></i>
+							<time>{{ pageData.publishStartDate | date }}</time>
+						</span>
+						<span *ngIf="pageData?.user?.name">
+							<i class="bi bi-person me-1"></i>
+							{{ pageData.user?.name }}
+						</span>
+						<span *ngIf="pageData?.author?.firstName && pageData?.author?.lastName">
+							<i class="bi bi-person me-1"></i>
+							{{ pageData.author?.firstName }} {{ pageData.author?.lastName }}
+						</span>
+						<span *ngIf="readingTime && config.showReadingTime">
+							<i class="bi bi-hourglass-split me-1"></i>
+							~{{ readingTime }} min read
+						</span>
+					</div>
+				</header>
+
+				<!-- Blog Intro -->
+				<div *ngIf="pageData?.description && pageData?.body" class="alert alert-secondary">
+					<div [innerHTML]="pageData.description"></div>
+				</div>
+
+				<!-- Blog Body -->
+				<div class="article-content" *ngIf="pageData?.description || pageData?.body; else descOnly">
+					<div [innerHTML]="pageData.body || pageData?.description"></div>
+				</div>
+
+				<ng-template #descOnly>
+					<div class="article-content" *ngIf="pageData?.description">
+						<div [innerHTML]="pageData.description"></div>
+					</div>
+				</ng-template>
+
+				<!-- Blog Footer (Likes, Share, Reviews) -->
+				<footer class="mt-4 pt-4 border-top">
+					<div class="d-flex align-items-center gap-3 mb-2">
+						<button type="button" class="btn btn-outline-primary d-flex align-items-center"
+							[class.active]="likeDislike === true" (click)="onLikeDislike(true)">
+							<i class="bi bi-hand-thumbs-up me-1" [class.text-primary]="likeDislike === true"></i>
+							<span>{{ likeCount }}</span>
+						</button>
+						<button type="button" class="btn btn-outline-danger d-flex align-items-center"
+							[class.active]="likeDislike === false" (click)="onLikeDislike(false)">
+							<i class="bi bi-hand-thumbs-down me-1" [class.text-danger]="likeDislike === false"></i>
+							<span>{{ dislikeCount }}</span>
+						</button>
+					</div>
+					<!-- Social Share (if component available) -->
+					<!-- <fa-social-share ...> </fa-social-share> -->
+					<!-- Reviews (if component available) -->
+					<!-- <fa-review ...> </fa-review> -->
+				</footer>
+			</article>
+		</div>
 	</div>
 </div>
