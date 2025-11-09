@@ -1,21 +1,33 @@
 @import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
-// Brand color variables
-$primary:   #b86f50;  // Brand copper tone
-$secondary: #4b3f3b;  // Deep brown accent
-$success:   #28a745;
-$danger:    #dc3545;
-$warning:   #ffc107;
-$info:      #17a2b8;
+// 1. Override Bootstrap variables BEFORE importing Bootstrap
+$primary:   #0076c0;
+$secondary: #001e31;
+$tertiary:  #f58220;
+$quaternary: #6dbb45;
+$success:   #4caf50;
+$info:      #c62828;
+$warning:   #ffb300;
+$danger:    #00a0c6;
+$light:     #f4f8fb;
+$dark:      #1a2a33;
 
-$body-bg:   #ffffff;
-$body-color:#212121;  // Dark readable text
-$border-color: #d1c7c3;  // Soft warm border
+// 2. Extend Bootstrap theme colors map
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+  "quaternary": $quaternary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
 
-$link-color:       $primary;
-$link-hover-color: darken($primary, 10%);
 
-$pagination-active-bg: $primary;
-$pagination-hover-bg:  $primary;
+// Import Bootstrap SCSS after variable overrides
+
 
 // Import Bootstrap SCSS after variable overrides
 @import 'bootstrap/scss/bootstrap';

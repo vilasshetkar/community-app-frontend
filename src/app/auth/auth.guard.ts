@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (isAuthenticated) {
       const user = this.userIdentity.userDetails;
       if (user && user.adminVerified === false) {
-        this.router.navigate(['pending-for-approval']);
+        this.router.navigate(['/']);
         return false;
       }
       if (next.routeConfig?.path?.includes('auth')) {
@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (isAuthenticated) {
       const user = this.userIdentity.userDetails;
       if (user && user.adminVerified === false) {
-        this.router.navigate(['pending-for-approval']);
+        this.router.navigate(['/']);
         return false;
       }
       if (childRoute.routeConfig?.path?.includes('auth')) {
